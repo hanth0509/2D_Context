@@ -9,40 +9,56 @@
     let rectX =0;
     let rectY =0;
 
-    let secondsPased = 0;//denta time 
+    let secondsPassed = 0;//delta time 
     let timePassed = 0;
     let oldTimeStamp = 0;
     let movingSpeed = 50; // pixels per second
 
+    let gameObjects;
     window.onload = init;
+
     function init() {
         canvas = document.getElementById("canvas");
         context = canvas.getContext("2d");
+
+        createWorld();
         window.requestAnimationFrame(gameLoop);
     };
+
     function gameLoop(timeStamp) {
         // Calculate how much time has passed
-        secondsPased = (timeStamp - oldTimeStamp) / 1000;
-        // Limit secondsPased to 0.1 seconds to avoid big jumps
-        secondsPased = Math.min(secondsPased, 0.1);
+        secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+        // Limit secondsPassed to 0.1 seconds to avoid big jumps
+        secondsPassed = Math.min(secondsPassed, 0.1);
         oldTimeStamp = timeStamp;
 
+        // Loop over all game objects
+         for (let i = 0; i < gameObjects.length; i++) {
+            gameObjects[i].update(secondsPassed);
+        }
+        clearCanvas();
+        // Do the same to draw
+        for (let i = 0; i < gameObjects.length; i++) {
+            gameObjects[i].draw();
+        }
         // Pass the time to the update
-        update(secondsPased);
-        draw();
+        /*update(secondsPassed);
+        draw();*/
         window.requestAnimationFrame(gameLoop);
     }
-    function update(secondsPased) {
-        timePassed += secondsPased;
+
+    function update(secondsPassed) {
+        timePassed += secondsPassed;
 
         //Use time to calculate new position
-        /*rectX += movingSpeed * secondsPased;
-        rectY += movingSpeed * secondsPased;*/
+        /*rectX += movingSpeed * secondsPassed;
+        rectY += movingSpeed * secondsPassed;*/
 
         // Use different easing functions for different effects.
         rectX = easeInOutQuint(timePassed, 50, 500, 1.5);
         rectY = easeLinear(timePassed, 50, 250, 1.5);
     }
+
     // Example easing functions
     function easeInOutQuint (t, b, c, d) {
         if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
@@ -63,4 +79,52 @@
         context.fillRect(rectX, rectY, 200, 175);
         
     }
+    function clearCanvas() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function createWorld(){
+    gameObjects = [
+        new Square(context, 250, 50, 0, 50),
+        new Square(context, 250, 300, 0, -50),
+        new Square(context, 150, 0, 50, 50),
+        new Square(context, 250, 150, 50, 50),
+        new Square(context, 350, 75, -50, 50),
+        new Square(context, 300, 300, 50, -50)
+    ];
+    }
+    class GameObject
+    {
+        constructor(context, x, y, vx, vy) {
+            this.context = context;
+            this.x = x;
+            this.y = y;
+            this.vx = vx;
+            this.vy = vy;
+
+            this.isColliding = false;
+        }
+    
+    }
+    class Square extends GameObject {
+            constructor(context, x, y, vx, vy) {
+                super(context, x, y, vx, vy);
+
+                // Set default width and height
+                this.width = 50;
+                this.height = 50;
+            }
+
+            draw() {
+                // Draw a simple square
+                this.context.fillStyle = this.isColliding ? '#ff8080' : '#0099b0';
+                this.context.fillRect(this.x, this.y, this.width, this.height);
+            }
+
+            update(secondsPassed) {
+                // Move with set velocity
+                this.x += this.vx * secondsPassed;
+                this.y += this.vy * secondsPassed;
+            }
+    }
+
 </script>
