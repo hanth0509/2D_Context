@@ -1,0 +1,30 @@
+<body>
+    <canvas id="canvas" width="1500" height="800"></canvas>
+    <img id="myImage" src="myimage.png" style="display: none;">
+</body>
+<script>
+    let canvas, context;
+    let img;
+    canvas = document.getElementById("canvas");
+    context = canvas.getContext("2d");
+
+    //Draw an image on the canvas
+    window.onload = function () {
+        /*let img1 = document.getElementById("myImage");
+        context.drawImage(img1, 50, 30);*/
+
+        //Load an image from a URL
+    }
+    let img2 = new Image();
+    img2.onload = function () {
+        /*context.drawImage(img2, 10, 10,100,200);
+        context.drawImage(img2, 200, 10,img2.width/2, img2.height/2);*/
+
+        /*context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = 'high';
+        context.drawImage(img2, 50, 30, img2.width * 2.5, img2.height * 2.5); */
+
+        context.drawImage(img2, 100, 40, 200, 100, 25, 30, 200, 50);
+    };
+    img2.src = 'https://cdn.phototourl.com/free/2026-06-05-6e0f9cbd-f5be-4c71-bba0-60dda8527962.png';
+</script>
