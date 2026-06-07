@@ -28,8 +28,10 @@ Basic physics concepts are implemented to simulate realistic object interactions
 
 To improve visual quality, images and sprite sheets are used instead of simple geometric shapes. Sprite animation techniques allow objects to display different frames, creating more dynamic and engaging game elements.
 
-<img width="600" height="321" alt="image" src="https://github.com/user-attachments/assets/54c351ca-6b82-420a-8167-50dc0e372d99" />
+<img width="600" height="321" alt="physics-mass-162126f33389e3843419fb987cd6863c" src="https://github.com/user-attachments/assets/0a1b8f6c-2dc6-48e9-8ede-80a7bc612d20" />
+
+
+<img width="600" height="336" alt="animation-rotation-b59e5d0ba68d714131bf0f85d3ddbc75" src="https://github.com/user-attachments/assets/9b68ea84-ee6d-4f2b-b05e-6f35a0708a32" />
 
 
 
-<img width="600" height="336" alt="image" src="https://github.com/user-attachments/assets/3dbf022d-20f7-4c45-b6cf-d92a3e384223" />
