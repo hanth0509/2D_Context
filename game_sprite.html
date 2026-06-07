@@ -207,7 +207,11 @@
                 this.radius * 2,
                 this.radius * 2
             );
-
+            this.context.beginPath();
+            this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            // this.context.fill();
+            this.context.strokeStyle = "red";
+            this.context.stroke();
         }
 
         update(secondsPassed) {
