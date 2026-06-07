@@ -1,6 +1,7 @@
 <body>
     <canvas id="canvas" width="1500" height="800"></canvas>
     <img id="myImage" src="myimage.png" style="display: none;">
+    <img id="sprite_sheets" src="sprite_sheets.png" style="display: none;">
 </body>
 <script>
     let canvas, context;
@@ -9,22 +10,37 @@
     context = canvas.getContext("2d");
 
     //Draw an image on the canvas
+    /*window.onload = function () {
+        let img1 = document.getElementById("myImage");
+        context.drawImage(img1, 50, 30);
+    }*/
+
+    /* let img2 = new Image();
+     img2.onload = function () {
+         context.drawImage(img2, 10, 10,100,200);
+         context.drawImage(img2, 200, 10,img2.width/2, img2.height/2);
+ 
+         context.imageSmoothingEnabled = true;
+         context.imageSmoothingQuality = 'high';
+         context.drawImage(img2, 50, 30, img2.width * 2.5, img2.height * 2.5); 
+         
+         //Clip and resize simultaneously
+         context.drawImage(img2, 100, 40, 200, 100, 25, 30, 200, 50);
+     };
+     img2.src = 'https://cdn.phototourl.com/free/2026-06-05-6e0f9cbd-f5be-4c71-bba0-60dda8527962.png';*/
+
+    //Use clipping with sprites
     window.onload = function () {
-        /*let img1 = document.getElementById("myImage");
-        context.drawImage(img1, 50, 30);*/
+        let sprite = document.getElementById("sprite_sheets");
+        // context.drawImage(sprite, 50, 30);
+        // Define the size of a frame
+        let frameWidth = 50;
+        let frameHeight = 61;
 
-        //Load an image from a URL
-    }
-    let img2 = new Image();
-    img2.onload = function () {
-        /*context.drawImage(img2, 10, 10,100,200);
-        context.drawImage(img2, 200, 10,img2.width/2, img2.height/2);*/
+        // Rows and columns start from 0
+        let row = 1;
+        let column = 3;
 
-        /*context.imageSmoothingEnabled = true;
-        context.imageSmoothingQuality = 'high';
-        context.drawImage(img2, 50, 30, img2.width * 2.5, img2.height * 2.5); */
-
-        context.drawImage(img2, 100, 40, 200, 100, 25, 30, 200, 50);
+        context.drawImage(sprite, column * frameWidth, row * frameHeight, frameWidth, frameHeight, 10, 30, frameWidth, frameHeight);
     };
-    img2.src = 'https://cdn.phototourl.com/free/2026-06-05-6e0f9cbd-f5be-4c71-bba0-60dda8527962.png';
 </script>
